@@ -3,42 +3,46 @@ from docx import Document
 
 
 # Abrir el documento Word existente
+documento_word = Document('acta.docx')
 
-horas_planeacion = {
-    'Utilizar herramientas informáticas de acuerdo con las necesidades de manejo de información': 48,
-    'APLICAR PRÁCTICAS DE PROTECCIÓN AMBIENTAL, SEGURIDAD Y SALUD EN EL TRABAJO DE ACUERDO CON LAS POLÍTICAS ORGANIZACIONALES Y LA NORMATIVIDAD VIGENTE.': 48,
-    'Razonar cuantitativamente frente a situaciones susceptibles de ser abordadas de manera matemática en contextos laborales, sociales y personales.': 48,
-    'APLICACIÓN DE CONOCIMIENTOS DE LAS CIENCIAS NATURALES DE ACUERDO CON SITUACIONES DEL CONTEXTO PRODUCTIVO Y SOCIAL.': 48,
-    'DESARROLLAR PROCESOS DE COMUNICACIÓN EFICACES Y EFECTIVOS, TENIENDO EN CUENTA SITUACIONES  DE ORDEN SOCIAL, PERSONAL Y PRODUCTIVO.': 48,
-    'GENERAR HÁBITOS SALUDABLES DE VIDA MEDIANTE LA APLICACIÓN DE PROGRAMAS DE ACTIVIDAD FÍSICA EN LOS CONTEXTOS PRODUCTIVOS Y SOCIALES.': 48,
-    'Orientar investigación formativa según referentes técnicos': 48,
-    'Enrique Low Murtra-Interactuar en el contexto productivo y social de acuerdo con principios  éticos para la construcción de una cultura de paz.': 48,
-    'INTERACTUAR EN LENGUA INGLESA DE FORMA ORAL Y ESCRITA DENTRO DE CONTEXTOS SOCIALES Y LABORALES SEGÚN LOS CRITERIOS ESTABLECIDOS POR EL MARCO COMÚN EUROPEO DE REFERENCIA PARA LAS LENGUAS.': 384 ,
-    'Fomentar cultura emprendedora según habilidades y competencias personales': 48
-}
+# Cargar el archivo de Excel en un DataFrame con la cabecera en la fila 13 y comenzando desde la fila 14
+df = pd.read_excel('Reporte de Juicios Evaluativos (1).xls',header=0,skiprows=12)
 
 
+# Access the specific paragraph where you want to insert text
+target_table = documento_word.tables[0]  # replace 0 with the index of the table
+target_cell = target_table.cell(7, 1)  # Suponiendo que la celda está en la fila 7 y columna 1
+target_paragraph = None
 
 
-# Cargar el archivo de Excel en competencias
-dfinstructorhoras = pd.read_excel('Reporte de Instructores por Ficha.xls',header=0,skiprows=10)
+# Crear una nueva columna 'Nombre completo' concatenando 'Nombre' y 'Apellidos'
+df['Nombrecompleto'] = df['Nombre'] + ' ' + df['Apellidos']
 
 
-dfinstructorhoras['Nombrecompleto'] = dfinstructorhoras['Nombre Instructor'] + ' ' + dfinstructorhoras['Apellido Instructor']
-dfinstructorhoras = dfinstructorhoras.sort_values(by='Competencia', ascending=True)
-
-# Añadir la columna 'Horas Planeadas' al DataFrame
-dfinstructorhoras['Horas Planeadas'] = dfinstructorhoras['Competencia'].map(horas_planeacion)
-
-dfinstructorhoras = dfinstructorhoras[['Nombrecompleto','Estado Instructor','Competencia','Horas Programadas','Horas Planeadas']]
+# informacion para la tabla de estudiantes 
+dfestudiantes=df.loc[df['Estado'] == 'EN FORMACION', ['Nombrecompleto', 'Número de Documento','Estado']]
+dfestudiantes = dfestudiantes.drop_duplicates(subset=['Nombrecompleto'])
 
 
-
-
-print(dfinstructorhoras)
+# Buscar la frase dentro de la celda
+for paragraph in target_cell.paragraphs:
+    if "Lo cual indica que se encuentran" in paragraph.text:
+    
+    # Insertar la tabla debajo de la frase encontrada
+        paragraph._p.addnext(tabla._element)
+        break
 
 
 
-#print(dfcompetencias[['Competencia', 'Juicio de Evaluación']])"""
+"""# Crear un nuevo archivo Excel
+with pd.ExcelWriter('informacion_estudiantes.xlsx') as writer:
+    # Iterar sobre cada grupo de estudiantes
+    for nombre_estudiante, datos_estudiante in grupos_estudiantes:
+        # Guardar los datos del estudiante en una hoja separada
+        datos_estudiante.to_excel(writer, sheet_name=nombre_estudiante, index=False)"""
 
 
+
+documento_word.save('acta.docx')
+
+print("exito")

@@ -9,9 +9,6 @@ documento_word = Document('acta.docx')
 df = pd.read_excel('Reporte de Juicios Evaluativos (1).xls',header=0,skiprows=12)
 
 
-# estudiantes en formacion 
-
-
 # Access the specific paragraph where you want to insert text
 target_table = documento_word.tables[0]  # replace 0 with the index of the table
 target_cell = target_table.cell(7, 1)  # Suponiendo que la celda está en la fila 7 y columna 1
@@ -52,20 +49,13 @@ for paragraph in target_cell.paragraphs:
         break
 
 
-
-
-
 # Agregar un párrafo en blanco entre las tablas
 documento_word.add_paragraph()
-
 
 
 # informacion para la tabla de estudiantes por retiros 
 dfestudiantes=df.loc[df['Estado'] != 'EN FORMACION', ['Nombrecompleto', 'Número de Documento','Estado']]
 dfestudiantesretiro = dfestudiantes.drop_duplicates(subset=['Nombrecompleto'])
-
-
-
 
 
     # Buscar la frase dentro de la celda

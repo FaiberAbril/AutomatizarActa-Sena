@@ -6,7 +6,7 @@ from docx import Document
 documento_word = Document('acta.docx')
 
 # Cargar el archivo de Excel en un DataFrame con la cabecera en la fila 13 y comenzando desde la fila 14
-df = pd.read_excel('Reporte de Juicios Evaluativos (1).xls',header=0,skiprows=12)
+df = pd.read_excel('Reporte de Juicios Evaluativos.xls',header=0,skiprows=12)
 
 
 # Access the specific paragraph where you want to insert text

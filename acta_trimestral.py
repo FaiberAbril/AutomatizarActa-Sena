@@ -1,27 +1,115 @@
-import pandas as pd
-from docx import Document
-
 import tkinter as tk
 from tkinter import filedialog, messagebox
+import pandas as pd
+import os
+import shutil
 
 
+# Función para seleccionar y copiar el archivo al proyecto
+def seleccionar_y_copiar_archivo():
+    # Abrir un diálogo para seleccionar el archivo desde el sistema operativo
+    archivo_origen = filedialog.askopenfilename(
+        title="Seleccionar archivo de Excel",
+        filetypes=[("Excel files", "*.xls *.xlsx")]
+    )
+
+    if archivo_origen:  # Si el usuario seleccionó un archivo
+        try:
+            # Obtener la ruta del directorio actual (carpeta del proyecto)
+            directorio_actual = os.getcwd()
+            # Obtener el nombre del archivo seleccionado
+            nombre_fijo = "Reporte de Juicios Evaluativos.xls"
+            # Ruta de destino (carpeta del proyecto + nombre del archivo)
+            ruta_destino = os.path.join(directorio_actual, nombre_fijo)
+
+            # Copiar el archivo seleccionado a la carpeta del proyecto
+            shutil.copy(archivo_origen, ruta_destino)
+
+            # Mostrar mensaje de éxito
+            messagebox.showinfo("Éxito", f"Archivo copiado a: {ruta_destino}")
+
+            # Cargar el archivo copiado
+            cargar_archivo(ruta_destino)  # Pasar la ruta del archivo como argumento
+        except Exception as e:
+            messagebox.showerror("Error", f"No se pudo copiar el archivo: {e}")
+
+
+def seleccionar_y_copiar_archivoinstructor():
+    # Abrir un diálogo para seleccionar el archivo desde el sistema operativo
+    archivo_origen = filedialog.askopenfilename(
+        title="Seleccionar archivo de Excel",
+        filetypes=[("Excel files", "*.xls *.xlsx")]
+    )
+
+    if archivo_origen:  # Si el usuario seleccionó un archivo
+        try:
+            # Obtener la ruta del directorio actual (carpeta del proyecto)
+            directorio_actual = os.getcwd()
+            # Obtener el nombre del archivo seleccionado
+            nombre_fijo = "Reporteporinstructor.xls"
+            # Ruta de destino (carpeta del proyecto + nombre del archivo)
+            ruta_destino = os.path.join(directorio_actual, nombre_fijo)
+
+            # Copiar el archivo seleccionado a la carpeta del proyecto
+            shutil.copy(archivo_origen, ruta_destino)
+
+            # Mostrar mensaje de éxito
+            messagebox.showinfo("Éxito", f"Archivo copiado a: {ruta_destino}")
+
+            # Cargar el archivo copiado
+            cargar_archivo(ruta_destino)  # Pasar la ruta del archivo como argumento
+        except Exception as e:
+            messagebox.showerror("Error", f"No se pudo copiar el archivo: {e}")
+
+
+# Función para cargar el archivo de Excel
+def cargar_archivo(ruta_archivo):
+    if os.path.exists(ruta_archivo):  # Verificar si el archivo existe
+        try:
+            # Cargar el archivo de Excel en un DataFrame
+            df = pd.read_excel(ruta_archivo, header=0, skiprows=12)
+            
+            # Mostrar el DataFrame en una ventana de mensaje
+            messagebox.showinfo("Datos Cargados", str(df.head()))
+        except Exception as e:
+            messagebox.showerror("Error", f"No se pudo cargar el archivo: {e}")
+    else:
+        messagebox.showerror("Error", f"El archivo no se encontró en la ruta: {ruta_archivo}")
+
+
+# Función para abrir la ventana de Acta Trimestral
 def abrir_ventana_acta_trimestral():
     # Crear una nueva ventana (Toplevel)
     ventana_acta_trimestral = tk.Toplevel()
-    ventana_acta_trimestral.title("Acta Trimestral")
-    ventana_acta_trimestral.geometry("400x300")  # Tamaño de la ventana
+    ventana_acta_trimestral.title("Cargar ")  # Título de la ventana
+    ventana_acta_trimestral.geometry("600x400")  # Tamaño de la ventana
 
     # Agregar contenido a la ventana de Acta Trimestral
-    etiqueta = tk.Label(ventana_acta_trimestral, text="Esta es la ventana del Acta Trimestral")
+    etiqueta = tk.Label(ventana_acta_trimestral, text="Seleccione el archivo de Excel para cargar")
     etiqueta.pack(pady=20)
 
+    # Crear un botón para seleccionar y copiar el archivo
+    boton_seleccionar = tk.Button(ventana_acta_trimestral, text="Seleccionar Reporte de Juicios Evaluativos", command=seleccionar_y_copiar_archivo)
+    boton_seleccionar.pack(pady=20)
+
+    # Agregar contenido a la ventana de Acta Trimestral
+    etiqueta = tk.Label(ventana_acta_trimestral, text="Seleccione el archivo de Excel para cargar")
+    etiqueta.pack(pady=20)
+
+    # Crear un botón para seleccionar y copiar el archivo
+    boton_seleccionar = tk.Button(ventana_acta_trimestral, text="Seleccionar Reporte de horas por instructor", command=seleccionar_y_copiar_archivoinstructor)
+    boton_seleccionar.pack(pady=20)
+
+    # Crear un botón para cerrar la ventana
     boton_cerrar = tk.Button(ventana_acta_trimestral, text="Cerrar", command=ventana_acta_trimestral.destroy)
     boton_cerrar.pack(pady=10)
 
 
-    
+
+
 
 """
+
 
 # Abrir el documento Word existente
 documento_word = Document('acta.docx')
@@ -261,6 +349,5 @@ documento_word.add_paragraph()
 
 documento_word.save('acta.docx')
 
-print("Se ha agregado una tabla al final del documento de Word con los datos de las columnas especificadas.")"
-""
+print("Se ha agregado una tabla al final del documento de Word con los datos de las columnas especificadas.")
 """

@@ -1,12 +1,33 @@
 import pandas as pd
 from docx import Document
 
+import tkinter as tk
+from tkinter import filedialog, messagebox
+
+
+def abrir_ventana_acta_trimestral():
+    # Crear una nueva ventana (Toplevel)
+    ventana_acta_trimestral = tk.Toplevel()
+    ventana_acta_trimestral.title("Acta Trimestral")
+    ventana_acta_trimestral.geometry("400x300")  # Tamaño de la ventana
+
+    # Agregar contenido a la ventana de Acta Trimestral
+    etiqueta = tk.Label(ventana_acta_trimestral, text="Esta es la ventana del Acta Trimestral")
+    etiqueta.pack(pady=20)
+
+    boton_cerrar = tk.Button(ventana_acta_trimestral, text="Cerrar", command=ventana_acta_trimestral.destroy)
+    boton_cerrar.pack(pady=10)
+
+
+    
+
+"""
 
 # Abrir el documento Word existente
-documento_word = Document('AutActaTrimestral/acta.docx')
+documento_word = Document('acta.docx')
 
 # Cargar el archivo de Excel en un DataFrame con la cabecera en la fila 13 y comenzando desde la fila 14
-df = pd.read_excel('AutActaTrimestral/Reporte de Juicios Evaluativos.xls',header=0,skiprows=12)
+df = pd.read_excel('Reporte de Juicios Evaluativos.xls',header=0,skiprows=12)
 
 
 # Access the specific paragraph where you want to insert text
@@ -190,7 +211,7 @@ horas_planeacion = {
 
 
 # Cargar el archivo de Excel en competencias
-dfinstructorhoras = pd.read_excel('AutActaTrimestral/Reporte de Instructores por Ficha.xls',header=0,skiprows=10)
+dfinstructorhoras = pd.read_excel('Reporte de Instructores por Ficha.xls',header=0,skiprows=10)
 
 
 dfinstructorhoras['Nombrecompleto'] = dfinstructorhoras['Nombre Instructor'] + ' ' + dfinstructorhoras['Apellido Instructor']
@@ -240,4 +261,6 @@ documento_word.add_paragraph()
 
 documento_word.save('acta.docx')
 
-print("Se ha agregado una tabla al final del documento de Word con los datos de las columnas especificadas.")
+print("Se ha agregado una tabla al final del documento de Word con los datos de las columnas especificadas.")"
+""
+"""

@@ -9,58 +9,58 @@ from seguimiento_aprendiz import seguimiento_por_aprendiz
 from seguimiento_formacion import seguimiento_a_la_formacion
 from geneneradorContrasena import generar_contrasena
 
+def main():
+    # Configuración de la página
+    st.set_page_config(
+        page_title="Sistema de Seguimiento de Formación",
+        page_icon="📊",
+        layout="wide",
+        initial_sidebar_state="expanded"
+    )
 
-# Configuración de la página
-st.set_page_config(
-    page_title="Sistema de Seguimiento de Formación",
-    page_icon="📊",
-    layout="wide",
-    initial_sidebar_state="expanded"
-)
+    # Título principal
+    st.title("Sistema de Seguimiento de Formación")
+    st.markdown("---")
 
-# Título principal
-st.title("Sistema de Seguimiento de Formación")
-st.markdown("---")
+    # Crear navegación en la barra lateral
+    st.sidebar.title("Navegación")
+    opcion = st.sidebar.radio(
+        "Seleccione una opción:",
+        ["Inicio", "Acta Trimestral", "Acta por Competencia", "Seguimiento por Aprendiz", 
+         "Seguimiento a la Formación", "Generador de Contraseñas"]
+    )
 
-# Crear navegación en la barra lateral
-st.sidebar.title("Navegación")
-opcion = st.sidebar.radio(
-    "Seleccione una opción:",
-    ["Inicio", "Acta Trimestral", "Acta por Trasversal", "Seguimiento por Aprendiz", 
-    "Seguimiento a la Formación","Generador de Contraseñas"]
-)
-
-# Mostrar la sección correspondiente
-if opcion == "Inicio":
-    st.header("Bienvenido al Sistema de Seguimiento de Formación")
-    st.markdown("""
-    Esta aplicación le permite generar reportes y realizar seguimiento a:
-    - Actas trimestrales de formación
-    - Actas por competencia específica
-    - Seguimiento individual por aprendiz
-    - Seguimiento general de la formación
-    
-    Utilice el menú de la izquierda para navegar entre las diferentes secciones.
-    """)
+    # Mostrar la sección correspondiente
+    if opcion == "Inicio":
+        st.header("Bienvenido al Sistema de Seguimiento de Formación")
+        st.markdown("""
+        Esta aplicación le permite generar reportes y realizar seguimiento a:
+        - Actas trimestrales de formación
+        - Actas por competencia específica
+        - Seguimiento individual por aprendiz
+        - Seguimiento general de la formación
         
-elif opcion == "Acta Trimestral":
-    acta_trimestral()
-    
-elif opcion == "Acta por Competencia":
-    acta_por_competencia()
-    
-elif opcion == "Seguimiento por Aprendiz":
-    seguimiento_por_aprendiz()
-    
-elif opcion == "Seguimiento a la Formación":
-    seguimiento_a_la_formacion()
+        Utilice el menú de la izquierda para navegar entre las diferentes secciones.
+        """)
+            
+    elif opcion == "Acta Trimestral":
+        acta_trimestral()
+        
+    elif opcion == "Acta por Competencia":
+        acta_por_competencia()
+        
+    elif opcion == "Seguimiento por Aprendiz":
+        seguimiento_por_aprendiz()
+        
+    elif opcion == "Seguimiento a la Formación":
+        seguimiento_a_la_formacion()
 
-elif opcion == "Generador de Contraseñas":
-    generar_contrasena()
+    elif opcion == "Generador de Contraseñas":
+        generar_contrasena()
 
+    # Pie de página
+    st.markdown("---")
+    st.markdown("FAIBER ADRIAN ABRIL ALVARADO © 2024-2025 - Desarrollado con Streamlit")
 
-
-
-# Pie de página
-st.markdown("---")
-st.markdown("FAIBER ADRIAN ABRIL ALVARADO © 2024-2025 - Desarrollado con Streamlit")
+if __name__ == "__main__":
+    main()

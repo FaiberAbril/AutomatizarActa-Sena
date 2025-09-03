@@ -34,7 +34,7 @@ def main():
     st.sidebar.title("Navegación")
     opcion = st.sidebar.radio(
         "Seleccione una opción:",
-        ["Inicio", "Acta Trimestral", "Acta por Competencia", "Seguimiento por Aprendiz", 
+        ["Inicio", "Acta Trimestral", "Acta competencia", "Seguimiento por Aprendiz", 
          "Seguimiento a la Formación", "Generador de Contraseñas"]
     )
 

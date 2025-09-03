@@ -54,7 +54,7 @@ def main():
     elif opcion == "Acta Trimestral":
         acta_trimestral()
         
-    elif opcion == "Acta por Competencia":
+    elif opcion == "Acta competencia":
         acta_por_competencia()
         
     elif opcion == "Seguimiento por Aprendiz":

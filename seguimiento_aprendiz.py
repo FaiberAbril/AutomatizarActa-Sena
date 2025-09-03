@@ -9,8 +9,8 @@ def seguimiento_por_aprendiz():
     st.subheader("1. Cargar archivo de juicios evaluativos")
     
     archivo_juicios = st.file_uploader("Seleccione el archivo Excel de juicios evaluativos", 
-                                     type=['xls', 'xlsx'],
-                                     key="juicios_aprendiz")
+                                    type=['xls', 'xlsx'],
+                                    key="juicios_aprendiz")
     
     if archivo_juicios:
         try:

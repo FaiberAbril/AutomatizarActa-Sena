@@ -14,16 +14,16 @@ def generar_contrasena():
     
     with col1:
         longitud = st.slider("Longitud de la contraseña", 
-                           min_value=8, 
-                           max_value=32, 
-                           value=12,
-                           help="Recomendado: 12-16 caracteres")
+                        min_value=8, 
+                        max_value=32, 
+                        value=12,
+                        help="Recomendado: 12-16 caracteres")
     
     with col2:
         num_contrasenas = st.slider("Número de contraseñas a generar", 
-                                  min_value=1, 
-                                  max_value=10, 
-                                  value=3)
+                                min_value=1, 
+                                max_value=10, 
+                                value=3)
     
     # Opciones de caracteres
     st.subheader("🔧 Opciones de caracteres")
@@ -72,22 +72,12 @@ def generar_contrasena():
                 st.code(contrasena, language="text")
             with col2:
                 st.button("📋 Copiar", key=f"copy_{i}", 
-                         on_click=copiar_al_portapapeles, 
-                         args=(contrasena,),
-                         use_container_width=True)
+                            on_click=copiar_al_portapapeles, 
+                            args=(contrasena,),
+                            use_container_width=True)
         
-        # Mostrar fortaleza
-        mostrar_fortaleza(contrasenas[0])
-        
-        # Consejos de seguridad
-        with st.expander("💡 Consejos de seguridad"):
-            st.markdown("""
-            - **Longitud**: Mínimo 12 caracteres
-            - **Variedad**: Usa mayúsculas, minúsculas, números y símbolos
-            - **Unicidad**: No reutilices contraseñas
-            - **Almacenamiento**: Usa un gestor de contraseñas
-            - **Autenticación**: Habilita 2FA cuando sea posible
-            """)
+      
+       
 
 def generar_contrasena_segura(longitud=12, mayusculas=True, minusculas=True, 
                             numeros=True, especiales=True, personalizados=""):
@@ -140,47 +130,6 @@ def copiar_al_portapapeles(texto):
         # Fallback para entornos sin pyperclip
         st.warning("No se pudo copiar automáticamente. Selecciona y copia manualmente.")
 
-def mostrar_fortaleza(contrasena):
-    """Analiza y muestra la fortaleza de la contraseña"""
-    st.subheader("📊 Análisis de fortaleza")
-    
-    fortaleza = 0
-    feedback = []
-    
-    # Longitud
-    if len(contrasena) >= 12:
-        fortaleza += 2
-        feedback.append("✅ Longitud adecuada (12+ caracteres)")
-    else:
-        feedback.append("⚠️ Longitud corta")
-    
-    # Variedad de caracteres
-    tipos_caracteres = 0
-    if any(c in string.ascii_uppercase for c in contrasena):
-        tipos_caracteres += 1
-    if any(c in string.ascii_lowercase for c in contrasena):
-        tipos_caracteres += 1
-    if any(c in string.digits for c in contrasena):
-        tipos_caracteres += 1
-    if any(c in string.punctuation for c in contrasena):
-        tipos_caracteres += 1
-    
-    if tipos_caracteres >= 3:
-        fortaleza += 2
-        feedback.append("✅ Buena variedad de caracteres")
-    else:
-        feedback.append("⚠️ Poca variedad de caracteres")
-    
-    # Mostrar resultado
-    if fortaleza >= 3:
-        st.success("🔒 Contraseña fuerte")
-    elif fortaleza >= 2:
-        st.warning("🔓 Contraseña media")
-    else:
-        st.error("🔓 Contraseña débil")
-    
-    for item in feedback:
-        st.write(item)
 
 # Ejecutar la aplicación
 if __name__ == "__main__":

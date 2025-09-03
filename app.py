@@ -12,17 +12,25 @@ from geneneradorContrasena import generar_contrasena
 def main():
     # Configuración de la página
     st.set_page_config(
-        page_title="Sistema de Seguimiento de Formación",
+        page_title="Sistema de Seguimiento de Formación", 
         page_icon="📊",
         layout="wide",
-        initial_sidebar_state="expanded"
+        initial_sidebar_state="expanded",
+        menu_items={
+            'About': """
+            **Sistema de Seguimiento de Formación**
+            
+            Autor: FAIBER ADRIAN ABRIL ALVARADO  
+            Copyright © 2024-2025  
+            Desarrollado con Streamlit
+            
+            Aplicación para gestión y seguimiento de 
+            formación técnica en el SENA.
+            """
+        }
     )
 
-    # Título principal
-    st.title("Sistema de Seguimiento de Formación")
-    st.markdown("---")
-
-    # Crear navegación en la barra lateral
+     # Crear navegación en la barra lateral
     st.sidebar.title("Navegación")
     opcion = st.sidebar.radio(
         "Seleccione una opción:",

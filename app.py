@@ -7,6 +7,7 @@ from acta_trimestral import acta_trimestral
 from acta_competencia import acta_por_competencia
 from seguimiento_aprendiz import seguimiento_por_aprendiz
 from seguimiento_formacion import seguimiento_a_la_formacion
+from geneneradorContrasena import generar_contrasena
 
 
 # Configuración de la página
@@ -25,7 +26,8 @@ st.markdown("---")
 st.sidebar.title("Navegación")
 opcion = st.sidebar.radio(
     "Seleccione una opción:",
-    ["Inicio", "Acta Trimestral", "Acta por Competencia", "Seguimiento por Aprendiz", "Seguimiento a la Formación"]
+    ["Inicio", "Acta Trimestral", "Acta por Competencia", "Seguimiento por Aprendiz", 
+    "Seguimiento a la Formación","Generador de Contraseñas"]
 )
 
 # Mostrar la sección correspondiente
@@ -53,8 +55,12 @@ elif opcion == "Seguimiento por Aprendiz":
 elif opcion == "Seguimiento a la Formación":
     seguimiento_a_la_formacion()
 
+elif opcion == "Generador de Contraseñas":
+    generar_contrasena()
+
+
 
 
 # Pie de página
 st.markdown("---")
-st.markdown("Sistema de Seguimiento de Formación © 2023 - Desarrollado con Streamlit")
+st.markdown("FAIBER ADRIAN ABRIL ALVARADO © 2024-2025 - Desarrollado con Streamlit")

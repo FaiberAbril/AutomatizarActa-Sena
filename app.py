@@ -40,15 +40,7 @@ if opcion == "Inicio":
     
     Utilice el menú de la izquierda para navegar entre las diferentes secciones.
     """)
-    
-    # Mostrar estadísticas rápidas en la página de inicio
-    st.subheader("Resumen Estadístico")
-    col1, col2, col3, col4 = st.columns(4)
-    col1.metric("Total Aprendices", "243")
-    col2.metric("Tasa de Aprobación", "87%")
-    col3.metric("Programas Activos", "4")
-    col4.metric("Competencias Evaluadas", "32")
-    
+        
 elif opcion == "Acta Trimestral":
     acta_trimestral()
     
@@ -60,6 +52,8 @@ elif opcion == "Seguimiento por Aprendiz":
     
 elif opcion == "Seguimiento a la Formación":
     seguimiento_a_la_formacion()
+
+
 
 # Pie de página
 st.markdown("---")
